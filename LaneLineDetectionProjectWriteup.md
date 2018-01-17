@@ -54,3 +54,4 @@ This pipeline can be further improved to detect lanes with higher accuracy on di
 1. Keep track of the lane lines from previous few frames (the current implementation stores data only from one previous frame) and use that data to fill in frames where the lane lines cannot be detected
 2. Certain parameters are hardcoded (identified based on trial and error) in the detection algorithm that works well for the 3 videos provided. There is scope for improvement in determining these parameters in an adaptive way
 3. Calculate the camera angle changes and do corrections to the lane positions based on this
+4. The algorithms could be improved for performance. For instance, a human driver does not look into the lane lines every frame. If we are designing an autonomous system that resembles a human driver, we should look at skipping frames depending on the road conditions (like looking at lanes less frequently on a straight road).
