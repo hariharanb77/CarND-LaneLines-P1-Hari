@@ -35,7 +35,7 @@ The edge detected image is subject to Hough transform to identify straight lines
 ![image7](./test_images_output/hough_lines.jpg)
 
 **Step 7: Lane line estimation and overlay**
-Using the straight lines obtained from the Hough transofrm, the lane lines are extrapolated and marked in the image. The extrapolation of lane lines is required as the lane lines may be discontinuous and the lines got from Hough transform may not be full. The final lines obtained from this process is shown below.
+Using the straight lines obtained from the Hough transofrm, the lane lines are extrapolated and marked in the image. The extrapolation of lane lines is required as the lane lines may be discontinuous and the lines got from Hough transform may not be full. The extrapolation logic also takes care of eliminating unwanted noise in the detected lines. The slope of the detected lanes in the previous frame is compared with the slope of the detected lines to eleminate unwanted lines from the final lane estimation. The final lines obtained from this process is shown below.
 ![image8](./test_images_output/lane_lines.jpg "Lanes")
 
 This lane lines image is then added on to the original image so that the lanes are marked on the original image as shown.
@@ -51,5 +51,6 @@ The pipeline makes a few assumptions and hence has the following limitations
 
 ## Improvements
 This pipeline can be further improved to detect lanes with higher accuracy on different conditions. The following improvements are possible
-1. Keep track of the lane lines from previous frames (currently it looks at each frame in isolation) and use that data to fill in frames where the lane lines could not be detected
-2. Calculate the camera angle changes and do corrections to the lane positions based on this
+1. Keep track of the lane lines from previous few frames (the current implementation stores data only from one previous frame) and use that data to fill in frames where the lane lines cannot be detected
+2. Certain parameters are hardcoded (identified based on trial and error) in the detection algorithm that works well for the 3 videos provided. There is scope for improvement in determining these parameters in an adaptive way
+3. Calculate the camera angle changes and do corrections to the lane positions based on this
